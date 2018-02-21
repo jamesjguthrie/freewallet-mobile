@@ -67,10 +67,10 @@
         // Setup tap listener on transaction hash field to send taps to xchain.io
         me.hash.btn.on('tap', function(cmp){
             var val   = me.hash.getValue(),
-                net   = (FW.WALLET_NETWORK==2) ? 'tBTC' : 'BTC',
-                host  = (FW.WALLET_NETWORK==2) ? 'testnet.xchain.io' : 'xchain.io',
+                net   = (FW.WALLET_NETWORK==2) ? 'CHAN' : 'CHAN',
+                host = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
                 asset = me.asset.getValue();
-            if(asset=='BTC')
+            if(asset=='CHAN')
                 url  = 'https://blocktrail.com/' + net + '/tx/' + val;
             else 
                 url  = 'https://' + host + '/tx/' + val;
@@ -210,9 +210,9 @@
     // Handle requesting transaction information
     getTransactionInfo: function(data){
         var me    = this,
-            net   = (FW.WALLET_NETWORK==2) ? 'tbtc' : 'btc',
-            hostA = (FW.WALLET_NETWORK==2) ? 'tbtc.blockr.io' : 'btc.blockr.io',
-            hostB = (FW.WALLET_NETWORK==2) ? 'testnet.xchain.io' : 'xchain.io';
+            net   = (FW.WALLET_NETWORK==2) ? 'CHAN' : 'CHAN',
+            hostA = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
+            hostB = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe';
         // Set loading mask on panel to indicate we are loading 
         me.setMasked({
             xtype: 'loadmask',
