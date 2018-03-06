@@ -38,15 +38,15 @@ Ext.define('FW.controller.Main', {
         // Define default server/host settings
         FW.SERVER_INFO    = {
             mainnet: {
-                cpHost: 'edgar.chancoin.moe',          // Counterparty Host
-                cpPort: 19118,                           // Counterparty Port
+                cpHost: '127.0.0.1',          // Counterparty Host
+                cpPort: 8332,                           // Counterparty Port
                 cpUser: 'rpc',                          // Counterparty Username
                 cpPass: '1234',                         // Counterparty Password
                 cpSSL: true                             // Counterparty SSL Enabled (true=https, false=http)
             },
             testnet: {
-                cpHost: 'edgar.chancoin.moe',          // Counterparty Host
-                cpPort: 19118,                          // Counterparty Port
+                cpHost: '127.0.0.1',          // Counterparty Host
+                cpPort: 8332,                          // Counterparty Port
                 cpUser: 'rpc',                          // Counterparty Username
                 cpPass: '1234',                         // Counterparty Password
                 cpSSL: true                             // Counterparty SSL Enabled (true=https, false=http)
@@ -564,11 +564,11 @@ Ext.define('FW.controller.Main', {
             prefix = addr.substr(0,5),
             store  = Ext.getStore('Balances'),
             net    = (FW.WALLET_NETWORK==2) ? 'chan' : 'chan',
-            hostA  = (FW.WALLET_NETWORK==2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
-            hostB  = (FW.WALLET_NETWORK==2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe';
+            hostA = (FW.WALLET_NETWORK == 2) ? 'chancoin.info' : 'chancoin.info',
+            hostB = (FW.WALLET_NETWORK == 2) ? 'chancoin.info' : 'chancoin.info';
         // Get Address balance from blocktrail
         me.ajaxRequest({
-            url: 'https://api.blocktrail.com/v1/' + net + '/address/' + address + '?api_key=' + FW.API_KEYS.BLOCKTRAIL,
+            url: 'http://chancoin.info' + '/ext/getaddress/' + address,
             success: function(o){
                 if(o.address){
                     var quantity  = (o.balance) ? numeral(o.balance * 0.00000001).format('0.00000000') : '0.00000000',
@@ -850,8 +850,8 @@ Ext.define('FW.controller.Main', {
     getTransactionHistory: function(address, callback){
         var me    = this,
             net   = (FW.WALLET_NETWORK==2) ? 'chan' : 'chan',
-            hostA = (FW.WALLET_NETWORK==2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
-            hostB = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
+            hostA = (FW.WALLET_NETWORK==2) ? '127.0.0.1:8332' : '127.0.0.1:8332',
+            hostB = (FW.WALLET_NETWORK == 2) ? '127.0.0.1:8332' : '127.0.0.1:8332',
             types = ['bets','broadcasts','burns','dividends','issuances','orders','sends','mempool'];
         // Get BTC transaction history from blocktrail
         me.ajaxRequest({
@@ -1476,7 +1476,7 @@ Ext.define('FW.controller.Main', {
     broadcastTransaction: function(network, tx, callback){
         var me  = this,
             net  = (network==2) ? 'CHANTEST' : 'CHAN';
-            host = (FW.WALLET_NETWORK==2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
+            host = (FW.WALLET_NETWORK==2) ? '127.0.0.1' : '127.0.0.1',
         // First try to broadcast using the XChain API
         me.ajaxRequest({
             url: 'https://' + host + '/api/send_tx',
@@ -1492,7 +1492,7 @@ Ext.define('FW.controller.Main', {
             failure: function(){
                 // If the request to XChain API failed, fallback to chain.so API
                 me.ajaxRequest({
-                    url: 'https://edgar.chancoin.moe/api/v2/send_tx/' + net,
+                    url: 'https://127.0.0.1/api/v2/send_tx/' + net,
                     method: 'POST',
                     jsonData: {
                         tx_hex: tx
@@ -1518,7 +1518,7 @@ Ext.define('FW.controller.Main', {
         var me = this,
             sm = localStorage;
         me.ajaxRequest({
-            url: 'https://edgar.chancoin.moe/api/network',
+            url: 'https://127.0.0.1/api/network',
             method: 'GET',
             success: function(o){
                 if(o && o.currency_info){
@@ -1543,7 +1543,7 @@ Ext.define('FW.controller.Main', {
     // Handle requesting information on a given token
     getTokenInfo: function(asset, callback){
         var me   = this,
-            host = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe';
+            host = (FW.WALLET_NETWORK == 2) ? '127.0.0.1' : '127.0.0.1';
         me.ajaxRequest({
             url: 'https://' + host + '/api/asset/' + asset,
             // Success function called when we receive a success response

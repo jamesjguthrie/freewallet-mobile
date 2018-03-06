@@ -3,8 +3,12 @@
     "",
     "\\app",
     "\\app\\controller",
-    "\\app\\model"
+    "\\app\\model",
+    "\\app\\view",
+    "\\packages",
+    "\\resources",
+    "\\resources\\js"
   ],
-  "SelectedNode": "\\app\\controller\\Main.js",
+  "SelectedNode": "\\app\\view\\Send.js",
   "PreviewInSolutionExplorer": false
 }

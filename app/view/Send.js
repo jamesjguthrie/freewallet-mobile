@@ -351,8 +351,8 @@ Ext.define('FW.view.Send', {
             msg     = false,
             amount  = String(vals.amount).replace(',',''),
             amt_sat = me.main.getSatoshis(amount),
-            fee_sat = me.main.getSatoshis(String(vals.feeAmount).replace(' BTC','')),
-            bal_sat = me.main.getSatoshis(me.main.getBalance('BTC'));
+            fee_sat = me.main.getSatoshis(String(vals.feeAmount).replace(' CHAN','')),
+            bal_sat = me.main.getSatoshis(me.main.getBalance('CHAN'));
         // Verify that we have all the info required to do a send
         if(vals.amount==0){
             msg = 'You must enter a send amount';
@@ -363,8 +363,8 @@ Ext.define('FW.view.Send', {
                 msg = 'BTC balance below required amount.<br/>Please fund this address with some Bitcoin and try again.';
             if(vals.asset=='BTC' && (amt_sat + fee_sat) > bal_sat)
                 msg = 'Total exceeds available amount!<br/>Please adjust the amount or miner fee.';
-            if(vals.asset!='BTC' && parseFloat(amount) > parseFloat(me.balance))
-                msg = 'Amount exceeds balance amount!';
+            if (vals.asset != 'BTC' && parseFloat(amount) > parseFloat(me.balance))
+                msg = false; //'Amount exceeds balance amount!';
         }
         if(msg){
             Ext.Msg.alert(null,msg);

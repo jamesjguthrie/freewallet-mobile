@@ -68,7 +68,7 @@
         me.hash.btn.on('tap', function(cmp){
             var val   = me.hash.getValue(),
                 net   = (FW.WALLET_NETWORK==2) ? 'CHAN' : 'CHAN',
-                host = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
+                host = (FW.WALLET_NETWORK == 2) ? '127.0.0.1' : '127.0.0.1',
                 asset = me.asset.getValue();
             if(asset=='CHAN')
                 url  = 'https://blocktrail.com/' + net + '/tx/' + val;
@@ -211,8 +211,8 @@
     getTransactionInfo: function(data){
         var me    = this,
             net   = (FW.WALLET_NETWORK==2) ? 'CHAN' : 'CHAN',
-            hostA = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe',
-            hostB = (FW.WALLET_NETWORK == 2) ? 'edgar.chancoin.moe' : 'edgar.chancoin.moe';
+            hostA = (FW.WALLET_NETWORK == 2) ? '127.0.0.1' : '127.0.0.1',
+            hostB = (FW.WALLET_NETWORK == 2) ? '127.0.0.1' : '127.0.0.1';
         // Set loading mask on panel to indicate we are loading 
         me.setMasked({
             xtype: 'loadmask',
